@@ -1,9 +1,13 @@
 package com.hananelsaid.hp.humyumred.Home_package.View;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,17 +17,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.hananelsaid.hp.humyumred.ContactUs_pakage.View.Contact_Activity;
 import com.hananelsaid.hp.humyumred.R;
+import com.hananelsaid.hp.humyumred.Terms_package.TermsActivity;
+import com.hananelsaid.hp.humyumred.User_Login_package.View.Login_Activity;
 
 public class Home_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Button login_btn;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,8 +55,28 @@ public class Home_Activity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        //ListView listView = (ListView) navigationView.getChildAt(1);
+        //inflat the layout
+        LayoutInflater inflater = LayoutInflater.from(Home_Activity.this);
+        View viewMyLayout = inflater.inflate(R.layout.loginl_view, null);
+        viewMyLayout.setPadding(10,1300,150,5);
+
+       // int bottom = navigationView.getBottom();
+        navigationView.addView(viewMyLayout);
+      //  listView.addFooterView(viewMyLayout, null, false);
+        login_btn= findViewById(R.id.login_button);
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home_Activity.this, Login_Activity.class);
+                startActivity(i);
+            }
+        });
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -93,10 +126,8 @@ public class Home_Activity extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.terms_item_id) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            Intent i = new Intent(Home_Activity.this, TermsActivity.class);
+            startActivity(i);
 
         }
 
@@ -104,4 +135,8 @@ public class Home_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
 }

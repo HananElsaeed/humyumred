@@ -15,6 +15,7 @@ public class Contact_Activity extends AppCompatActivity implements MainContract.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mPresenter= new MainPresenter();
     }
 

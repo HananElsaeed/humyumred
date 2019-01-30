@@ -22,9 +22,15 @@
             android:name=".Home_package.View.Home_Activity"
             android:label="@string/title_activity_home_"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ContactUs_pakage.View.Contact_Activity"
+        <activity
+            android:name=".ContactUs_pakage.View.Contact_Activity"
             android:label="@string/title_activity_contact"
-           ></activity>
+            android:parentActivityName=".Home_package.View.Home_Activity" />
+        <activity
+            android:name=".Terms_package.TermsActivity"
+            android:parentActivityName=".Home_package.View.Home_Activity" />
+        <activity android:name=".User_Login_package.View.Login_Activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
