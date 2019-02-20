@@ -29,8 +29,12 @@
         <activity
             android:name=".Terms_package.TermsActivity"
             android:parentActivityName=".Home_package.View.Home_Activity" />
-        <activity android:name=".User_Login_package.View.Login_Activity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".User_Login_package.View.Login_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".User_Registration_package.View.User_Register_Activity"
+            android:parentActivityName=".Home_package.View.Home_Activity"/>
+
     </application>
 
 </manifest>

@@ -19,16 +19,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.hananelsaid.hp.humyumred.ContactUs_pakage.View.Contact_Activity;
 import com.hananelsaid.hp.humyumred.R;
 import com.hananelsaid.hp.humyumred.Terms_package.TermsActivity;
 import com.hananelsaid.hp.humyumred.User_Login_package.View.Login_Activity;
+import com.hananelsaid.hp.humyumred.User_Registration_package.View.User_Register_Activity;
 
 public class Home_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Button login_btn;
+    TextView userOuterRegister;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -72,6 +75,14 @@ public class Home_Activity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Home_Activity.this, Login_Activity.class);
+                startActivity(i);
+            }
+        });
+        userOuterRegister=findViewById(R.id.userOutRegister_txt);
+        userOuterRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home_Activity.this, User_Register_Activity.class);
                 startActivity(i);
             }
         });
