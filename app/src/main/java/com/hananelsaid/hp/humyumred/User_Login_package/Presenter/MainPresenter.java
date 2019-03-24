@@ -21,16 +21,14 @@ public class MainPresenter implements IViewPresenter, IModelPresenter {
 
     public void checkResponseThenOpenHome() {
        if (model.responseStatus())
-       {
-          view.validUser();
-       }
+       { view.validUser(); }
+       else {view.unvalidUser();}
     }
 
 
     public void catchdata(String email ,String password)
     {
         model.getData(email,password);
-
     }
 
 

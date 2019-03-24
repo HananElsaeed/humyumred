@@ -19,6 +19,6 @@ public interface UserLoginRetrofit {
    @FormUrlEncoded
    @POST("api/login")
     Call<RootClass> getUserData(@Field("email") String email ,@Field("password") String password,@Field("register_token")String register_token);
-   // public void getUserData(Callback<User> response);
+
 
 }

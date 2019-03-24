@@ -46,8 +46,9 @@ public class Login_Activity extends AppCompatActivity implements IView {
             public void onClick(View view) {
                 String userEmail = userEmail_Etxt.getText().toString();
                 String userPassword = userPassword_Etxt.getText().toString();
+                if (!TextUtils.isEmpty(userEmail)&&!TextUtils.isEmpty(userPassword)){
                 presenterinstance.catchdata(userEmail,userPassword);
-                presenterinstance.checkResponseThenOpenHome();
+                presenterinstance.checkResponseThenOpenHome();}
 
 
 
@@ -62,10 +63,6 @@ public class Login_Activity extends AppCompatActivity implements IView {
                 startActivity(i);
             }
         });
-
-
-
-
     }
 
 
@@ -73,5 +70,10 @@ public class Login_Activity extends AppCompatActivity implements IView {
     public void validUser() {
         Intent i = new Intent(Login_Activity.this, Home_Activity.class);
         startActivity(i);
+    }
+
+    @Override
+    public void unvalidUser() {
+        Toast.makeText(Login_Activity.this, "unvalid user", Toast.LENGTH_SHORT).show();
     }
 }

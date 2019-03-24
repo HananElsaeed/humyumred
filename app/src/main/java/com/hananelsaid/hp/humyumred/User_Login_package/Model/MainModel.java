@@ -19,26 +19,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainModel implements MainContract.IModel {
 
     private MainContract.IModelPresenter presenter;
-
-    String email;
-    String password;
     Boolean status = false;
-    static  String token ="eqwO3RnBYsE:APA91bF1KdcyfWBdKWextD50MomtQ5vHLZpTzUA83_3qwZgYcJ3NW87Vv3WKk4pEFUThKo_V_Z0AUf7G8Zd1Zi_JtJr_wJ2Ax7p6DyihV3r5Rhl-1zCTW3H3WzWLoqrW0JqijD9aFhbwWpCNtqnHERwK1tRadBIzpQ";
+
+
+    static String token = "eqwO3RnBYsE:APA91bF1KdcyfWBdKWextD50MomtQ5vHLZpTzUA83_3qwZgYcJ3NW87Vv3WKk4pEFUThKo_V_Z0AUf7G8Zd1Zi_JtJr_wJ2Ax7p6DyihV3r5Rhl-1zCTW3H3WzWLoqrW0JqijD9aFhbwWpCNtqnHERwK1tRadBIzpQ";
 
 
     public MainModel(MainContract.IModelPresenter presenter) {
         this.presenter = presenter;
     }
 
-    public void catchemailandpass() {
-
-
-
-    }
-
 
     @Override
-    public void getData(String email ,String password) {
+    public void getData(String email, String password) {
 
         String API_BASE_URL = "http://backend.devolum.com/humyum/public/";
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -46,27 +39,23 @@ public class MainModel implements MainContract.IModel {
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(API_BASE_URL).addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.client(httpClient.build()).build();
         UserLoginRetrofit client = retrofit.create(UserLoginRetrofit.class);
-        //catch user email and password
-        catchemailandpass();
 
         // Fetch a list of the Github repositories.
-        Call<RootClass> call = client.getUserData(email, password,token);
+        Call<RootClass> call = client.getUserData(email, password, token);
         call.enqueue(new Callback<RootClass>() {
-
 
             @Override
             public void onResponse(Call<RootClass> call, Response<RootClass> response) {
 
                 User user = response.body().getUser();
-               // Log.i("firstname", user.getFirstName());
-                //using singleton and the data base
-                DB_lite db = MySingleton.getInstance().getDB();
-                db.insertContact(user.getAccessToken(), user.getEmail(), user.getFirstName(),
-                        user.getLastName(), user.getPhone(), user.getRegisterToken(), user.getRole(), user.getUpdatedAt());
+                // Log.i("firstname", user.getFirstName());
+                if (response.code() == 200) {
+                    DB_lite db = MySingleton.getInstance().getDB();
+                    db.insertContact(user.getAccessToken(), user.getEmail(), user.getFirstName(),
+                            user.getLastName(), user.getPhone(), user.getRegisterToken(), user.getRole(), user.getUpdatedAt());
+                    status = true;
 
-                Log.i("onResponse: ", db.toString());
-                status = true;
-
+                }
             }
 
             @Override
@@ -82,7 +71,5 @@ public class MainModel implements MainContract.IModel {
     }
 
     @Override
-    public Boolean responseStatus() {
-        return status;
-    }
+    public Boolean responseStatus() { return status; }
 }
